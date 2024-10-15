@@ -50,7 +50,7 @@ int izbroji(char* filename) {
 	int count = 0;
 	FILE* fp = NULL;
 
-	fp = fopen(filename, "w");
+	fp = fopen(filename, "r");
 	if (fp == NULL) {
 		return ERROR_OPENING_FILE;
 	}
