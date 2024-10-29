@@ -1,6 +1,0 @@
-Ante	Antic	3
-Jure	Juric	20
-Ivo	Ivic	14
-Niko	Nikic	26
-Jera	Jerkic	19
-Ale	Alic	30

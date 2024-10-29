@@ -1,0 +1,2 @@
+﻿sp-zad-2.obj : error LNK2005: main already defined in sp-zad-1.obj
+C:\Users\antek\OneDrive\Radna površina\kundid\x64\Debug\labovi-sp.exe : fatal error LNK1169: one or more multiply defined symbols found
