@@ -1,0 +1,5 @@
+﻿  sp-zad-3.c
+C:\Users\antek\OneDrive\Radna površina\kundid\SP-ZAD-3\SP-ZAD-3\SP-ZAD-3\sp-zad-3.c(138,5): warning C4033: 'find' must return a value
+C:\Users\antek\OneDrive\Radna površina\kundid\SP-ZAD-3\SP-ZAD-3\SP-ZAD-3\sp-zad-3.c(254,9): warning C4098: 'ispisi_iz_datoteke': 'void' function returning a value
+C:\Users\antek\OneDrive\Radna površina\kundid\SP-ZAD-3\SP-ZAD-3\SP-ZAD-3\sp-zad-3.c(139,1): warning C4715: 'find': not all control paths return a value
+  SP-ZAD-3.vcxproj -> C:\Users\antek\OneDrive\Radna površina\kundid\SP-ZAD-3\SP-ZAD-3\x64\Debug\SP-ZAD-3.exe

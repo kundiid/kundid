@@ -1,0 +1,7 @@
+Ime:	Prezime:	God:
+Ina	Imic	12
+Ica	Kilic	22
+Ante	Kundid	12
+Frano	Kundid	11
+Ivo	Mijic	66
+Jelo	Zoko	45
