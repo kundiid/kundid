@@ -25,6 +25,7 @@ void dodaj(pozicija, char*, char*, int, char*);
 void sort(pozicija);
 void upisi_u_datoteku(pozicija);
 void ispisi_iz_datoteke(pozicija);
+void oslobodi_listu(pozicija );
 
 
 
@@ -58,6 +59,10 @@ int main() {
     print_liste(head);
 
     upisi_u_datoteku(head);
+
+    
+     oslobodi_listu( head);
+    free(head);
    
     return 0;
 }
@@ -264,5 +269,19 @@ void ispisi_iz_datoteke(pozicija head) {
     }
    
     
+}
+void oslobodi_listu(pozicija head) {
+
+	pozicija curr = head;
+
+	while (curr != NULL) {
+
+		pozicija temp = curr;
+		curr = curr->next;
+		free(temp);
+
+	}
+
+	curr->next = NULL;
 }
 
