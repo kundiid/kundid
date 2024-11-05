@@ -268,7 +268,7 @@ void ispisi_iz_datoteke(pozicija head) {
 
     }
    
-    
+    fclose(fp);
 }
 void oslobodi_listu(pozicija head) {
 
