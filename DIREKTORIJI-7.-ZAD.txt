@@ -16,16 +16,14 @@ typedef struct dir{
     char dir_name[20];
     position_dat doc_head;
     position_dir next_dir;
+    position_dir sub_head;
     position_dir dot;
     position_dir dbl_dot;
-
-   
 
 }dir;
 
 void add_dir(position_dir , char*);
 void add_doc(position_dir, char*);
-void create_doc_head(position_dir);
 void print_path(position_dir);
 
 
@@ -37,25 +35,31 @@ int main() {
     c = malloc(sizeof(dir));
     if (c == NULL) return 1;
     strcpy(c->dir_name, "c:");
-    create_doc_head(c);
-    c->dbl_dot = NULL;
-    c->dot = c;
-    c->next_dir = NULL;
+    c->dot=c;
+    c->dbl_dot=NULL;
+    c->next_dir=NULL;
+    c->sub_head=NULL;
+    c->doc_head=NULL;
 
+ 
+
+
+// probni sub directory koji sadrzi neke "fileove"
     position_dir Korisnik;
     Korisnik = malloc(sizeof(dir));  if (Korisnik == NULL) return 1;
     strcpy(Korisnik->dir_name, "Korisnik");
-    create_doc_head(Korisnik);
     Korisnik->dbl_dot = c;
     Korisnik->dot = Korisnik;
     Korisnik->next_dir = NULL;
+     Korisnik->sub_head=NULL;
+    Korisnik->doc_head=NULL;
 
     add_doc(Korisnik, "rezultati.txt");
     add_doc(Korisnik, "ucenici.txt");
     add_doc(Korisnik, "ispitni_rokovi.txt");
 
     // Dodavanje korisnika kao poddirektorija "c:\"
-    c->next_dir = Korisnik;
+    c->sub_head= Korisnik;
 
     char command[20];
  
@@ -75,16 +79,24 @@ int main() {
         else if (strcmp(command,"cd")==0){
             char pod_direktoriji[20];
             scanf("%s",pod_direktoriji);
-            position_dir temp=curr;
+            position_dir temp=curr->sub_head;
              while(1){
 
                 if(strcmp(pod_direktoriji,".")==0){
                          break;
                      }
-                else if(strcmp(pod_direktoriji,"..")==0){
-                        curr=temp->dbl_dot;   
-                        break;   
-                     }
+                else if(strcmp(pod_direktoriji,"..")==0){ 
+                        
+                        if(curr->dbl_dot==NULL){
+                            break;
+                        }
+                        else {
+
+                            curr=curr->dbl_dot;  
+                            break;     
+
+                        }
+                        }
                 else if(temp==NULL){
                     printf("Nepostojeci Direktoriji!\n");
                     break;
@@ -141,22 +153,17 @@ void add_dir(position_dir curr, char *ime_dir){
 //ova funckija služi da dodavanje direktorija u driektoriji u kojem se mi trenutno nalazimo
     position_dir novi=malloc(sizeof(dir)); if (novi==NULL) return;
 
-    novi->dbl_dot=curr;
-    novi->dot=novi;
-    create_doc_head(novi);
-    novi->doc_head->next_doc=NULL;
     strcpy(novi->dir_name,ime_dir);
+    novi->dot=novi;
+    novi->dbl_dot=curr;
+    novi->doc_head=NULL;
+    novi->sub_head=NULL;
+    novi->next_dir=NULL;
 
-    if(curr->next_dir==NULL)
-    {
-    curr->next_dir=novi;
-    }
-    else
-    {
-    novi->next_dir=curr->next_dir;
-    curr->next_dir=novi;
-    }
+    novi->next_dir=curr->sub_head;
+    curr->sub_head=novi;
 
+   
 }
 
 void add_doc(position_dir curr, char* ime_dat){
@@ -165,32 +172,20 @@ void add_doc(position_dir curr, char* ime_dat){
     novi->next_doc=NULL;
    strcpy(novi->doc_ime,ime_dat);
 
-    position_dat temp=curr->doc_head;
-
-    if(temp->next_doc==NULL){
-        temp->next_doc=novi;
-    }else
-    {
-    novi->next_doc=temp->next_doc;
-    temp->next_doc=novi;
-    }
-
+if(curr->doc_head==NULL){
+    curr->doc_head=novi;
+}else{
+    novi->next_doc=curr->doc_head;
+    curr->doc_head=novi;
+}
  
 }
 
-void create_doc_head(position_dir dire){
-
-    position_dat head=malloc(sizeof(dat)); if (head==NULL) return;
-
-    head->next_doc=NULL;
-    dire->doc_head=head;
-
-}
 
 void print_dir(position_dir curr){
 
-        position_dir dire=curr->next_dir;
-        position_dat doc_curr=curr->doc_head->next_doc;
+        position_dir dire=curr->sub_head;
+        position_dat doc_curr=curr->doc_head;
 
        if (curr->dbl_dot==NULL){
           printf("<DIR>\t.\n");
@@ -227,3 +222,6 @@ void print_path(position_dir curr){
         printf("c:");
     }
 }
+
+
+
